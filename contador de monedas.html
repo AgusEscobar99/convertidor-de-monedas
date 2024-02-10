@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convertidor de Monedas</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #2b0505;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-image:url(finanzas-e1552605917786-800x400.jpg)
+
+             
+        };
+         
+    
+        
+
+        h1 {
+            color: #000000;
+        }
+
+        label {
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        input, select, button {
+            margin-bottom: 20px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #resultado {
+            font-size: 25px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Convertidor de Monedas</h1>
+    
+    <label for="amount">Cantidad:</label>
+    <input type="number" id="amount" placeholder="Cantidad" />
+    
+    <label for="fromCurrency">De:</label>
+    <select id="fromCurrency">
+        <option value="USD">Dólar estadounidense (USD)</option>
+        <option value="EUR">Euro (EUR)</option>
+        <option value="JPY">Yen japonés (JPY)</option>
+    </select>
+    
+    <label for="toCurrency">A:</label>
+    <select id="toCurrency">
+        <option value="USD">Dólar estadounidense (USD)</option>
+        <option value="EUR">Euro (EUR)</option>
+        <option value="JPY">Yen japonés (JPY)</option>
+    </select>
+    
+    <button onclick="convertir()">Convertir</button>
+    
+    <h2>Resultado:</h2>
+    <div id="resultado"></div>
+
+    <script>
+        function convertir() {
+            const amount = parseFloat(document.getElementById("amount").value);
+            const fromCurrency = document.getElementById("fromCurrency").value;
+            const toCurrency = document.getElementById("toCurrency").value;
+            
+            // Tasas de cambio ficticias (deberías obtenerlas de una fuente confiable)
+            const tasasDeCambio = {
+                USD: {
+                    EUR: 0.85,
+                    JPY: 110.52,
+                },
+                EUR: {
+                    USD: 1.18,
+                    JPY: 130.02,
+                },
+                JPY: {
+                    USD: 0.0091,
+                    EUR: 0.0077,
+                },
+            };
+            
+            const tasaDeCambio = tasasDeCambio[fromCurrency][toCurrency];
+            const resultado = (amount * tasaDeCambio).toFixed(2);
+            
+            document.getElementById("resultado").innerText = `${amount} ${fromCurrency} = ${resultado} ${toCurrency}`;
+        }
+    </script>
+</body>
+</html>
